@@ -3,498 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge AI - One Conversation. Infinite Intelligence.</title>
+    <title>Forge AI - Intelligent Workspace</title>
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/navbar.css">
+    <link rel="stylesheet" href="/assets/css/sidebar.css">
+    <link rel="stylesheet" href="/assets/css/workspace.css">
+    <link rel="stylesheet" href="/assets/css/chat.css">
+    <link rel="stylesheet" href="/assets/css/planner.css">
+    <link rel="stylesheet" href="/assets/css/artifacts.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/themes.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/variables.css">
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/layout.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
-    <link rel="stylesheet" href="assets/css/themes.css">
-    <style>
-        /* Landing Page Specific Styles */
-        .landing-page {
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: var(--spacing-2xl);
-            text-align: center;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .hero-particles {
-            position: absolute;
-            inset: 0;
-        }
-
-        .hero-orb {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
-            background: var(--primary-light);
-            border: 1px solid var(--primary);
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--primary);
-            margin-bottom: var(--spacing-xl);
-            animation: fadeInDown var(--transition-slow) ease;
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: var(--radius-full);
-            background: var(--primary);
-            animation: pulse 2s infinite;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: var(--spacing-lg);
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp var(--transition-slow) ease 0.2s backwards;
-        }
-
-        .hero-title-highlight {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.125rem, 2vw, 1.5rem);
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto var(--spacing-2xl);
-            animation: fadeInUp var(--transition-slow) ease 0.4s backwards;
-        }
-
-        .hero-cta {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--spacing-md);
-            animation: fadeInUp var(--transition-slow) ease 0.6s backwards;
-        }
-
-        .btn-hero {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            padding: var(--spacing-md) var(--spacing-2xl);
-            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            color: var(--text-primary);
-            border-radius: var(--radius-xl);
-            font-size: 1.125rem;
-            font-weight: 600;
-            transition: all var(--transition-base);
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-        }
-
-        .btn-hero:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl), 0 0 40px rgba(124, 58, 237, 0.5);
-        }
-
-        .btn-hero-icon {
-            font-size: 1.25rem;
-        }
-
-        .btn-secondary-hero {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            transition: color var(--transition-fast);
-        }
-
-        .btn-secondary-hero:hover {
-            color: var(--text-primary);
-        }
-
-        /* Orchestration Animation */
-        .orchestration-demo {
-            margin-top: var(--spacing-2xl);
-            padding: var(--spacing-xl);
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-2xl, 24px);
-            animation: fadeInUp var(--transition-slow) ease 0.8s backwards;
-        }
-
-        .orchestration-steps {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-md);
-            flex-wrap: wrap;
-        }
-
-        .orchestration-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-md) var(--spacing-lg);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            min-width: 120px;
-            transition: all var(--transition-base);
-        }
-
-        .orchestration-step.active {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .orchestration-step-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-lg);
-            background: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            color: var(--primary);
-        }
-
-        .orchestration-step-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .orchestration-arrow {
-            color: var(--text-tertiary);
-            font-size: 1.25rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: var(--spacing-2xl);
-            background: var(--bg-surface);
-        }
-
-        .features-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-xl);
-        }
-
-        .feature-card {
-            padding: var(--spacing-xl);
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            transition: all var(--transition-base);
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow);
-            transform: translateY(-4px);
-        }
-
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-xl);
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .feature-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .feature-desc {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Footer */
-        .footer {
-            padding: var(--spacing-2xl);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: var(--spacing-lg);
-        }
-
-        .footer-link {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            transition: color var(--transition-fast);
-        }
-
-        .footer-link:hover {
-            color: var(--primary);
-        }
-
-        .footer-copyright {
-            font-size: 0.875rem;
-            color: var(--text-tertiary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .orchestration-steps {
-                flex-direction: column;
-            }
-
-            .orchestration-arrow {
-                transform: rotate(90deg);
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: var(--spacing-lg);
-                text-align: center;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="theme-dark accent-violet">
-    <div class="landing-page">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-bg">
-                <div class="hero-particles" id="particles"></div>
-                <div class="hero-orb ai-orb"></div>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="logo">
+                <div class="ai-orb-small"></div>
+                <span class="logo-text">Forge AI</span>
+            </div>
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="Search conversations, projects, artifacts...">
+                <kbd class="shortcut-hint">⌘K</kbd>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <button class="icon-btn" title="New Chat">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"></path>
+                </svg>
+            </button>
+            <button class="icon-btn" title="Notifications">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="profile-menu">
+                <div class="avatar">JD</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <button class="sidebar-btn primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    New Chat
+                </button>
             </div>
 
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    Now in Public Beta
+            <div class="sidebar-section">
+                <div class="sidebar-label">Workspace</div>
+                <button class="sidebar-btn active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Chat
+                </button>
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <path d="M3 9h18M9 21V9"></path>
+                    </svg>
+                    Planner
+                </button>
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Execution
+                </svg>
+                    Execution
+                </button>
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path>
+                    </svg>
+                    Artifacts
+                </button>
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <path d="M12 18v-6M9 15l3 3 3-3"></path>
+                    </svg>
+                    Files
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Projects</div>
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    E-commerce Site
+                </button>
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Data Analysis
+                </button>
+            </div>
+
+            <div class="sidebar-section sidebar-footer">
+                <button class="sidebar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    Settings
+                </button>
+                <div class="storage-info">
+                    <div class="storage-bar">
+                        <div class="storage-used" style="width: 45%"></div>
+                    </div>
+                    <span class="storage-text">4.5 GB / 10 GB used</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="chat-container">
+                <!-- Welcome State -->
+                <div class="welcome-state" id="welcomeState">
+                    <div class="welcome-logo">
+                        <div class="ai-orb-large"></div>
+                    </div>
+                    <h1 class="welcome-title">What can I help you build today?</h1>
+                    <p class="welcome-subtitle">I can help you code, design, research, analyze, and create.</p>
+                    
+                    <div class="suggestion-grid">
+                        <button class="suggestion-card">
+                            <div class="suggestion-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                                    <path d="M2 2l7.586 7.586"></path>
+                                    <circle cx="11" cy="11" r="2"></circle>
+                                </svg>
+                            </div>
+                            <div class="suggestion-text">
+                                <strong>Build a website</strong>
+                                <span>Create a responsive e-commerce site with React</span>
+                            </div>
+                        </button>
+                        
+                        <button class="suggestion-card">
+                            <div class="suggestion-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div class="suggestion-text">
+                                <strong>Analyze data</strong>
+                                <span>Process CSV files and generate insights</span>
+                            </div>
+                        </button>
+                        
+                        <button class="suggestion-card">
+                            <div class="suggestion-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path>
+                                </svg>
+                            </div>
+                            <div class="suggestion-text">
+                                <strong>Write documentation</strong>
+                                <span>Create technical docs for your API</span>
+                            </div>
+                        </button>
+                        
+                        <button class="suggestion-card">
+                            <div class="suggestion-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <div class="suggestion-text">
+                                <strong>Design a dashboard</strong>
+                                <span>Create analytics dashboard with charts</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
-                <h1 class="hero-title">
-                    One Conversation.<br>
-                    <span class="hero-title-highlight">Infinite Intelligence.</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    Forge AI orchestrates multiple capabilities to understand, plan, and execute complex tasks. Just describe your goal.
-                </p>
-
-                <div class="hero-cta">
-                    <a href="workspace.html" class="btn-hero">
-                        <span>Start Workspace</span>
-                        <span class="btn-hero-icon">→</span>
-                    </a>
-                    <button class="btn-secondary-hero">
-                        <span>Watch Demo</span>
-                        <span>▶</span>
-                    </button>
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chatMessages" style="display: none;">
+                    <!-- Messages will be dynamically added here -->
                 </div>
 
-                <!-- Live Orchestration Animation -->
-                <div class="orchestration-demo">
-                    <div class="orchestration-steps">
-                        <div class="orchestration-step active">
-                            <div class="orchestration-step-icon">💬</div>
-                            <span class="orchestration-step-label">Understand</span>
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                        <div class="input-actions">
+                            <button class="attach-btn" title="Attach file">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                                </svg>
+                            </button>
+                            <button class="voice-btn" title="Voice input">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                                    <line x1="8" y1="23" x2="16" y2="23"></line>
+                                </svg>
+                            </button>
+                            <button class="image-btn" title="Upload image">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>
+                            </button>
                         </div>
-                        <span class="orchestration-arrow">→</span>
-                        <div class="orchestration-step">
-                            <div class="orchestration-step-icon">📋</div>
-                            <span class="orchestration-step-label">Plan</span>
+                        <textarea 
+                            class="message-input" 
+                            placeholder="Ask anything..." 
+                            rows="1"
+                            id="messageInput"
+                        ></textarea>
+                        <button class="send-btn" id="sendBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="disclaimer">Forge AI can make mistakes. Verify important information.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel (Execution/Artifacts) -->
+        <aside class="right-panel" id="rightPanel">
+            <div class="panel-tabs">
+                <button class="panel-tab active" data-tab="execution">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Execution
+                </button>
+                <button class="panel-tab" data-tab="artifacts">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path>
+                    </svg>
+                    Artifacts
+                </button>
+                <button class="panel-tab" data-tab="memory">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                    Memory
+                </button>
+            </div>
+
+            <div class="panel-content">
+                <!-- Execution Tab -->
+                <div class="tab-content active" id="executionTab">
+                    <div class="execution-timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Understanding Request</div>
+                                <div class="timeline-desc">Analyzing intent and context</div>
+                            </div>
                         </div>
-                        <span class="orchestration-arrow">→</span>
-                        <div class="orchestration-step">
-                            <div class="orchestration-step-icon">⚡</div>
-                            <span class="orchestration-step-label">Execute</span>
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Task Decomposition</div>
+                                <div class="timeline-desc">Breaking down into subtasks</div>
+                            </div>
                         </div>
-                        <span class="orchestration-arrow">→</span>
-                        <div class="orchestration-step">
-                            <div class="orchestration-step-icon">✅</div>
-                            <span class="orchestration-step-label">Deliver</span>
+                        <div class="timeline-item active">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Planning Execution</div>
+                                <div class="timeline-desc">Creating execution graph</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item pending">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Running Agents</div>
+                                <div class="timeline-desc">Executing parallel tasks</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item pending">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Validation</div>
+                                <div class="timeline-desc">Quality assurance checks</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item pending">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Response Composition</div>
+                                <div class="timeline-desc">Merging and formatting results</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Artifacts Tab -->
+                <div class="tab-content" id="artifactsTab">
+                    <div class="artifacts-list">
+                        <div class="artifact-item">
+                            <div class="artifact-icon code">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </div>
+                            <div class="artifact-info">
+                                <div class="artifact-name">app.js</div>
+                                <div class="artifact-meta">2.4 KB • Updated 2m ago</div>
+                            </div>
+                        </div>
+                        <div class="artifact-item">
+                            <div class="artifact-icon doc">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path>
+                                </svg>
+                            </div>
+                            <div class="artifact-info">
+                                <div class="artifact-name">README.md</div>
+                                <div class="artifact-meta">1.2 KB • Updated 5m ago</div>
+                            </div>
+                        </div>
+                        <div class="artifact-item">
+                            <div class="artifact-icon image">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>
+                            </div>
+                            <div class="artifact-info">
+                                <div class="artifact-name">dashboard.png</div>
+                                <div class="artifact-meta">245 KB • Updated 10m ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory Tab -->
+                <div class="tab-content" id="memoryTab">
+                    <div class="memory-section">
+                        <h4>Current Context</h4>
+                        <div class="memory-item">
+                            <span class="memory-tag">Project</span>
+                            <span>E-commerce Website</span>
+                        </div>
+                        <div class="memory-item">
+                            <span class="memory-tag">Tech Stack</span>
+                            <span>React, Node.js, PostgreSQL</span>
+                        </div>
+                        <div class="memory-item">
+                            <span class="memory-tag">User Preference</span>
+                            <span>TypeScript preferred</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="features">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3 class="feature-title">Intelligent Orchestration</h3>
-                    <p class="feature-desc">
-                        Automatically breaks down complex requests into manageable tasks and routes them to the most suitable AI capabilities.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 class="feature-title">Parallel Execution</h3>
-                    <p class="feature-desc">
-                        Independent tasks run simultaneously, dramatically reducing wait times for complex workflows.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">Smart Validation</h3>
-                    <p class="feature-desc">
-                        Every output is validated for accuracy, completeness, and quality before delivery.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h3 class="feature-title">Artifact Management</h3>
-                    <p class="feature-desc">
-                        Generate, version, and manage documents, code, images, websites, and more—all in one place.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3 class="feature-title">Enterprise Security</h3>
-                    <p class="feature-desc">
-                        Bank-grade encryption, access controls, and audit logging keep your data protected.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Live Analytics</h3>
-                    <p class="feature-desc">
-                        Real-time insights into execution progress, resource usage, and performance metrics.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="navbar-logo-icon">⚡</div>
-                    <span>Forge AI</span>
-                </div>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Documentation</a>
-                    <a href="#" class="footer-link">API</a>
-                    <a href="#" class="footer-link">Pricing</a>
-                    <a href="#" class="footer-link">About</a>
-                </div>
-                <p class="footer-copyright">© 2024 Forge AI. All rights reserved.</p>
-            </div>
-        </footer>
+        </aside>
     </div>
 
-    <script src="assets/js/animations.js"></script>
-    <script>
-        // Initialize particle background
-        function initParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
-                particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
-                container.appendChild(particle);
-            }
-        }
-
-        // Animate orchestration steps
-        function animateOrchestration() {
-            const steps = document.querySelectorAll('.orchestration-step');
-            let currentIndex = 0;
-
-            setInterval(() => {
-                steps.forEach((step, index) => {
-                    step.classList.toggle('active', index === currentIndex);
-                });
-                currentIndex = (currentIndex + 1) % steps.length;
-            }, 2000);
-        }
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            initParticles();
-            animateOrchestration();
-        });
-    </script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/animations.js"></script>
 </body>
 </html>

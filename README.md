@@ -1,176 +1,75 @@
-# Forge AI
+# Forge AI - Intelligent Workspace
 
-**One Conversation. Infinite Intelligence.**
+A modern, ChatGPT/Perplexity-style AI workspace interface.
 
-Forge AI is an intelligent orchestration platform that automatically understands, plans, and executes complex tasks using multiple AI capabilities—all through a single conversation interface.
+## 🚀 Deploy to Vercel
 
-## 🚀 Features
+### Option 1: Vercel Dashboard
+1. Go to [vercel.com](https://vercel.com)
+2. Click "Add New Project"
+3. Import your GitHub repository
+4. **Framework Preset**: Select `Other`
+5. **Build Command**: Leave empty
+6. **Install Command**: Leave empty
+7. **Output Directory**: Keep as `.`
+8. Click "Deploy"
 
-- **Intelligent Orchestration**: Automatically breaks down complex requests into manageable tasks
-- **Parallel Execution**: Independent tasks run simultaneously for faster results
-- **Smart Validation**: Every output is validated before delivery
-- **Artifact Management**: Generate and manage documents, code, images, websites, and more
-- **Live Progress Tracking**: Real-time visualization of execution progress
-- **Theme Customization**: Multiple themes and accent colors
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
+### Option 2: Vercel CLI
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy to production
+vercel --prod
+```
 
 ## 📁 Project Structure
 
 ```
 Forge-AI/
-│
-├── index.html              # Landing page
-├── workspace.html          # Main workspace
-├── projects.html           # Projects overview
-├── login.html              # Authentication
-├── signup.html             # Registration
-│
+├── index.html          # Main workspace (ChatGPT-style)
+├── vercel.json         # Vercel configuration
 ├── assets/
-│   ├── css/
-│   │   ├── variables.css   # CSS custom properties
-│   │   ├── reset.css       # Base reset styles
-│   │   ├── layout.css      # Layout utilities
-│   │   ├── navbar.css      # Navigation bar
-│   │   ├── sidebar.css     # Side navigation
-│   │   ├── workspace.css   # Main workspace layout
-│   │   ├── chat.css        # Chat interface
-│   │   ├── planner.css     # Task planner view
-│   │   ├── artifacts.css   # Artifact management
-│   │   ├── animations.css  # Animation keyframes
-│   │   ├── responsive.css  # Media queries
-│   │   └── themes.css      # Theme variations
-│   │
-│   ├── js/
-│   │   ├── app.js          # Main application logic
-│   │   ├── router.js       # Client-side routing
-│   │   ├── api.js          # API communication
-│   │   ├── websocket.js    # Real-time connections
-│   │   ├── chat.js         # Chat functionality
-│   │   ├── planner.js      # Planning logic
-│   │   ├── artifacts.js    # Artifact handling
-│   │   └── animations.js   # Animation utilities
-│   │
-│   ├── images/
-│   ├── icons/
-│   └── fonts/
-│
-├── components/             # Reusable HTML components
-├── pages/                  # Additional pages
-├── data/                   # Configuration files
+│   ├── css/           # All stylesheets
+│   └── js/            # JavaScript modules
 └── README.md
 ```
 
-## 🎨 Themes
+## 🎨 Features
 
-Forge AI includes multiple built-in themes:
+- **Modern UI**: Clean, dark theme inspired by ChatGPT and Perplexity
+- **Responsive Design**: Works on desktop, tablet, and mobile
+- **Animated AI Orb**: Visual feedback for AI processing
+- **Execution Timeline**: Live progress tracking
+- **Artifact Management**: View generated files
+- **Context Memory**: Track conversation context
+- **Quick Suggestions**: Pre-built prompt templates
 
-- **Dark** (default) - Easy on the eyes for extended use
-- **Light** - Clean and bright
-- **Midnight** - Deep blue tones
-- **Forest** - Nature-inspired greens
-- **Ocean** - Calming blues
-- **Purple Haze** - Rich purples
-- **Crimson** - Bold reds
-- **Amber** - Warm ambers
+## 🛠️ Local Development
 
-### Accent Colors
+Open `index.html` in any modern browser or use a local server:
 
-Choose from various accent color schemes:
+```bash
+# Using Python
+python -m http.server 8000
 
-- Violet (default)
-- Blue
-- Emerald
-- Rose
-- Amber
-- Cyan
-
-## 🚀 Getting Started
-
-1. Open `index.html` in your browser to view the landing page
-2. Click "Start Workspace" to enter the main workspace
-3. Type your request in the prompt area or select a suggestion card
-
-## ⌨️ Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Cmd/Ctrl + K` | Focus search |
-| `Cmd/Ctrl + Enter` | Send message |
-| `Escape` | Close sidebar (mobile) |
-
-## 🎯 Workspace Components
-
-### Navbar
-- Logo and branding
-- Global search
-- Notifications
-- User profile
-
-### Sidebar
-- New chat creation
-- Navigation (Chat, Planner, Execution, Artifacts)
-- Projects and analytics
-- History and settings
-
-### Main Workspace
-- Execution timeline with progress tracking
-- Prompt input with attachments
-- Real-time status updates
-
-### Right Panel
-- Chat conversations
-- Task planner visualization
-- Artifact gallery
-- File management
-
-## 🔧 Customization
-
-### Changing Themes
-
-```javascript
-// Via JavaScript
-document.body.classList.remove('theme-dark');
-document.body.classList.add('theme-light');
-
-// Via CSS class on body element
-<body class="theme-midnight accent-blue">
+# Using Node.js
+npx serve .
 ```
 
-### Adjusting Animation Speed
+## 🎯 Configuration
 
-```html
-<body class="animation-fast">   <!-- Quick transitions -->
-<body class="animation-normal"> <!-- Default -->
-<body class="animation-slow">   <!-- Slower, smoother -->
-```
+No build process required. This is a static HTML/CSS/JS project.
 
-## 📱 Responsive Breakpoints
-
-- **Desktop**: 1400px+
-- **Laptop**: 1200px - 1399px
-- **Tablet**: 768px - 1199px
-- **Mobile**: < 768px
-- **Small Mobile**: < 480px
-
-## 🔮 Backend Integration
-
-The frontend is designed to integrate with the Forge AI backend orchestration engine:
-
-| Frontend Module | Backend Service |
-|-----------------|-----------------|
-| Chat Window | Conversation Engine |
-| Planner Panel | Execution Planner |
-| Timeline | Execution Manager |
-| Artifact Manager | Artifact Service |
-| Project Explorer | Project Service |
-| Settings | Configuration Service |
-| Notifications | Monitoring Service |
-| Analytics | Logging & Analytics |
+### Vercel Settings
+- **Framework**: Static/Other
+- **Build Command**: (empty)
+- **Install Command**: (empty)
+- **Output Directory**: `.`
 
 ## 📄 License
 
-© 2024 Forge AI. All rights reserved.
-
----
-
-**Built with ❤️ for the future of AI orchestration**
+MIT
