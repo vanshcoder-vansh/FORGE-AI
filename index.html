@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge AI - One Conversation. Infinite Intelligence.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <style>
+        /* Landing Page Specific Styles */
+        .landing-page {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-2xl);
+            text-align: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-orb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInDown var(--transition-slow) ease;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: var(--radius-full);
+            background: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp var(--transition-slow) ease 0.2s backwards;
+        }
+
+        .hero-title-highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-2xl);
+            animation: fadeInUp var(--transition-slow) ease 0.4s backwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+            animation: fadeInUp var(--transition-slow) ease 0.6s backwards;
+        }
+
+        .btn-hero {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-2xl);
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: var(--text-primary);
+            border-radius: var(--radius-xl);
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl), 0 0 40px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-hero-icon {
+            font-size: 1.25rem;
+        }
+
+        .btn-secondary-hero {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            transition: color var(--transition-fast);
+        }
+
+        .btn-secondary-hero:hover {
+            color: var(--text-primary);
+        }
+
+        /* Orchestration Animation */
+        .orchestration-demo {
+            margin-top: var(--spacing-2xl);
+            padding: var(--spacing-xl);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-2xl, 24px);
+            animation: fadeInUp var(--transition-slow) ease 0.8s backwards;
+        }
+
+        .orchestration-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .orchestration-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            min-width: 120px;
+            transition: all var(--transition-base);
+        }
+
+        .orchestration-step.active {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .orchestration-step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-lg);
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .orchestration-step-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .orchestration-arrow {
+            color: var(--text-tertiary);
+            font-size: 1.25rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: var(--spacing-2xl);
+            background: var(--bg-surface);
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .feature-card {
+            padding: var(--spacing-xl);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-base);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-xl);
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            padding: var(--spacing-2xl);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .footer-link {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .orchestration-steps {
+                flex-direction: column;
+            }
+
+            .orchestration-arrow {
+                transform: rotate(90deg);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--spacing-lg);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="theme-dark accent-violet">
+    <div class="landing-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-particles" id="particles"></div>
+                <div class="hero-orb ai-orb"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Now in Public Beta
+                </div>
+
+                <h1 class="hero-title">
+                    One Conversation.<br>
+                    <span class="hero-title-highlight">Infinite Intelligence.</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Forge AI orchestrates multiple capabilities to understand, plan, and execute complex tasks. Just describe your goal.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="workspace.html" class="btn-hero">
+                        <span>Start Workspace</span>
+                        <span class="btn-hero-icon">→</span>
+                    </a>
+                    <button class="btn-secondary-hero">
+                        <span>Watch Demo</span>
+                        <span>▶</span>
+                    </button>
+                </div>
+
+                <!-- Live Orchestration Animation -->
+                <div class="orchestration-demo">
+                    <div class="orchestration-steps">
+                        <div class="orchestration-step active">
+                            <div class="orchestration-step-icon">💬</div>
+                            <span class="orchestration-step-label">Understand</span>
+                        </div>
+                        <span class="orchestration-arrow">→</span>
+                        <div class="orchestration-step">
+                            <div class="orchestration-step-icon">📋</div>
+                            <span class="orchestration-step-label">Plan</span>
+                        </div>
+                        <span class="orchestration-arrow">→</span>
+                        <div class="orchestration-step">
+                            <div class="orchestration-step-icon">⚡</div>
+                            <span class="orchestration-step-label">Execute</span>
+                        </div>
+                        <span class="orchestration-arrow">→</span>
+                        <div class="orchestration-step">
+                            <div class="orchestration-step-icon">✅</div>
+                            <span class="orchestration-step-label">Deliver</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Intelligent Orchestration</h3>
+                    <p class="feature-desc">
+                        Automatically breaks down complex requests into manageable tasks and routes them to the most suitable AI capabilities.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Parallel Execution</h3>
+                    <p class="feature-desc">
+                        Independent tasks run simultaneously, dramatically reducing wait times for complex workflows.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Smart Validation</h3>
+                    <p class="feature-desc">
+                        Every output is validated for accuracy, completeness, and quality before delivery.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3 class="feature-title">Artifact Management</h3>
+                    <p class="feature-desc">
+                        Generate, version, and manage documents, code, images, websites, and more—all in one place.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Enterprise Security</h3>
+                    <p class="feature-desc">
+                        Bank-grade encryption, access controls, and audit logging keep your data protected.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Live Analytics</h3>
+                    <p class="feature-desc">
+                        Real-time insights into execution progress, resource usage, and performance metrics.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="navbar-logo-icon">⚡</div>
+                    <span>Forge AI</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">API</a>
+                    <a href="#" class="footer-link">Pricing</a>
+                    <a href="#" class="footer-link">About</a>
+                </div>
+                <p class="footer-copyright">© 2024 Forge AI. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/animations.js"></script>
+    <script>
+        // Initialize particle background
+        function initParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Animate orchestration steps
+        function animateOrchestration() {
+            const steps = document.querySelectorAll('.orchestration-step');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                steps.forEach((step, index) => {
+                    step.classList.toggle('active', index === currentIndex);
+                });
+                currentIndex = (currentIndex + 1) % steps.length;
+            }, 2000);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            animateOrchestration();
+        });
+    </script>
+</body>
+</html>
